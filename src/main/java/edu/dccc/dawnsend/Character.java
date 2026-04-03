@@ -29,6 +29,6 @@ public class Character {
         return info.toString() + "\n" +
                 stats.toString() + "\n" +
                 skills.toString() + "\n" +
-                formatActions();
+                "Actions\n" + formatActions();
     }
 }
