@@ -202,18 +202,27 @@ public class CharacterList {
         return characterList;
     }
 
+    // create boolean to track next and previous use
+    // if true, we just moved forward, if false, we moved back
+    // this is so that the same character doesn't get shown again when we switch directions
+    private boolean moveForward = true;
+
     public Character showNextChar() {
-        if (iterator.hasNext()) {
-            return iterator.next();
+        // if !moveForward, go next one to avoid duplicate
+        if (!moveForward) {
+            iterator.next();
         }
-        return null;
+        moveForward = true;
+        return iterator.next();
     }
 
     public Character showPreviousChar() {
-        if (iterator.hasPrevious()) {
-            return iterator.previous();
+        // if moveForward, go back one to avoid duplicate
+        if (moveForward) {
+            iterator.previous();
         }
-        return null;
+        moveForward = false;
+        return iterator.previous();
     }
 
     // include index of character so finding via index works
