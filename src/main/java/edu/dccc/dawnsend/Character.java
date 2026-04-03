@@ -16,11 +16,19 @@ public class Character {
         this.actions = actions;
     }
 
+    private String formatActions() {
+        String actionsString = "";
+        for (Actions action : actions) {
+            actionsString += action.toString();
+        }
+        return actionsString;
+    }
+
     @Override
     public String toString() {
-        return info.toString() +
-                stats.toString() +
-                skills.toString() +
-                actions.toString();
+        return info.toString() + "\n" +
+                stats.toString() + "\n" +
+                skills.toString() + "\n" +
+                formatActions();
     }
 }

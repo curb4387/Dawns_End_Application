@@ -17,11 +17,11 @@ public class CharacterInfo {
 
     @Override
     public String toString() {
-        return "Character{" +
+        return "Character\n" +
                 "Name: " + name + "\n" +
                 "Race: " + race + "\n" +
                 "Class: " + charClass + "\n" +
-                "Level: " + level + "}";
+                "Level: " + level + "\n";
     }
 
     public String getName() {

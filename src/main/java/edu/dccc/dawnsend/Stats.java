@@ -13,10 +13,9 @@ public class Stats {
 
     @Override
     public String toString() {
-        return "All Stats\n{" +
+        return "All Stats\n" +
                 "Main Stats:\n" + mainStats + "\n" +
-                "\nOther Stats:\n" + otherStats +
-                '}';
+                "\nOther Stats:\n" + otherStats + "\n";
     }
 
     // inner class to get MainStats

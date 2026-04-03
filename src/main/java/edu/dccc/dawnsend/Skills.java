@@ -13,10 +13,9 @@ public class Skills {
 
     @Override
     public String toString() {
-        return "All Skills\n{" +
+        return "All Skills\n" +
                 "Main Skills:\n" + mainSkills + "\n" +
-                "Senses:\n" + senses +
-                '}';
+                "Senses:\n" + senses + "\n";
     }
 
     // inner class to get Skills

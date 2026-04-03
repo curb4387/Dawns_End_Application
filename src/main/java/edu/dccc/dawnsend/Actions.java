@@ -14,11 +14,9 @@ public class Actions {
     @Override
     public String toString() {
         if (minDamage == maxDamage) {
-            return "Actions\n{" +
-                    attack + " (" + maxDamage + ")\n}";
+            return attack + " (" + maxDamage + ")\n";
         }
-        return "Actions\n{" +
-                attack + " (" + minDamage + " - " + maxDamage + ")\n}";
+        return attack + " (" + minDamage + " - " + maxDamage + ")\n";
     }
 
     public String getAttack() {
