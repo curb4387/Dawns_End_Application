@@ -215,4 +215,65 @@ public class CharacterList {
         }
         return null;
     }
+
+    // include index of character so finding via index works
+    public void showAllCharacters() {
+        for (int i = 0; i < characterList.size(); i++) {
+            System.out.println("Character Index: " + i + "\n" + characterList.get(i));
+        }
+    }
+
+    // show character at given index
+    public void showSingleCharacter(Scanner in) {
+        System.out.println("Enter index: ");
+        int index = Integer.parseInt(in.nextLine());
+        System.out.println("Character at index: " + index + "\n" + characterList.get(index));
+        resetIteratorToIndex(index + 1);
+    }
+
+    // change iterator to given index so next character is after that index
+    public void resetIteratorToIndex(int index) {
+        int size = characterList.size();
+        if (size == 0) { return; }
+        int normalizedIndex = ((index % size) + size) % size; // works safely with negative indexes
+        iterator = characterList.iterator();
+
+        for(int i = 0; i < normalizedIndex; i++) {
+            iterator.next();
+        }
+    }
+
+    public void testCharacterList() {
+        Scanner in = new Scanner(System.in);
+        iterator = characterList.iterator();
+        String menuItem = "";
+
+        while (!menuItem.toLowerCase().equals("q")) {
+            System.out.println("Next Character <n>, Previous Character <p>, All Characters <a>, Character by Index <i>, Quit <q>: ");
+            menuItem = in.nextLine();
+
+            switch (menuItem.toLowerCase()) {
+                case "n":
+                    Character nCh = showNextChar();
+                    System.out.println(nCh);
+                    break;
+                case "p":
+                    Character pCh = showPreviousChar();
+                    System.out.println(pCh);
+                    break;
+                case "a":
+                    showAllCharacters();
+                    break;
+                case "i":
+                    showSingleCharacter(in);
+            }
+        }
+        System.out.println("Thank you for viewing the Dawn's End campaign characters!");
+    }
+
+    public static void main(String[] args) {
+        CharacterList chList = new CharacterList();
+        chList.addCharacters();
+        chList.testCharacterList();
+    }
 }
