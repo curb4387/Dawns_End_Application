@@ -2,14 +2,11 @@ package edu.dccc.dawnsend;
 
 import edu.dccc.store.CircularLinkedList;
 
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public class CharacterList {
     CircularLinkedList<Character> characterList = new CircularLinkedList<>();
-    Iterator<Character> iterator = characterList.iterator();
+    ListIterator<Character> iterator = characterList.iterator();
 
     public void addCharacters() {
         characterList.add(createBarbonk());
@@ -205,5 +202,17 @@ public class CharacterList {
         return characterList;
     }
 
-    // add iterator methods and testing
+    public Character showNextChar() {
+        if (iterator.hasNext()) {
+            return iterator.next();
+        }
+        return null;
+    }
+
+    public Character showPreviousChar() {
+        if (iterator.hasPrevious()) {
+            return iterator.previous();
+        }
+        return null;
+    }
 }
