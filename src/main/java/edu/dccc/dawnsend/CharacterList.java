@@ -222,7 +222,7 @@ public class CharacterList {
             iterator.previous();
         }
         moveForward = false;
-        return iterator.previous();
+        return iterator.next();
     }
 
     // include index of character so finding via index works
@@ -233,11 +233,13 @@ public class CharacterList {
     }
 
     // show character at given index
-    public void showSingleCharacter(Scanner in) {
+    public Character showSingleCharacter(Scanner in) {
         System.out.println("Enter index: ");
         int index = Integer.parseInt(in.nextLine());
-        System.out.println("Character at index: " + index + "\n" + characterList.get(index));
+//        System.out.println("Character at index: " + index + "\n" + characterList.get(index));
+        Character c = characterList.get(index);
         resetIteratorToIndex(index + 1);
+        return c;
     }
 
     // change iterator to given index so next character is after that index
@@ -261,22 +263,31 @@ public class CharacterList {
         while (!menuItem.toLowerCase().equals("q")) {
             System.out.println("Next Character <n>, Previous Character <p>, All Characters <a>, Character by Index <i>, Quit <q>: ");
             menuItem = in.nextLine();
+            Character c;
+            AbilityList abList;
 
             switch (menuItem.toLowerCase()) {
                 case "n":
-                    Character nCh = showNextChar();
-
-                    System.out.println(nCh);
+                    c = showNextChar();
+                    System.out.println(c.getInfo());
+                    abList = new AbilityList(c);
+                    abList.testAbilityList();
                     break;
                 case "p":
-                    Character pCh = showPreviousChar();
-                    System.out.println(pCh);
+                    c = showPreviousChar();
+                    System.out.println(c.getInfo());
+                    abList = new AbilityList(c);
+                    abList.testAbilityList();
                     break;
                 case "a":
                     showAllCharacters();
                     break;
                 case "i":
-                    showSingleCharacter(in);
+                    c = showSingleCharacter(in);
+                    System.out.println(c.getInfo());
+                    abList = new AbilityList(c);
+                    abList.testAbilityList();
+                    break;
             }
         }
         System.out.println("Thank you for viewing the Dawn's End campaign characters!");
