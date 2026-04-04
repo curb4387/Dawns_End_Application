@@ -76,7 +76,8 @@ public class AbilityList {
     public void showSingleSection(Scanner in) {
         System.out.println("Enter index: ");
         int index = Integer.parseInt(in.nextLine());
-        System.out.println("Section at index: " + index + "\n" + abilitySections.get(index));
+        System.out.println("Section at index: " + index + "\n");
+        showPage(abilitySections.get(index));
         resetIteratorToIndex(index + 1);
     }
 
