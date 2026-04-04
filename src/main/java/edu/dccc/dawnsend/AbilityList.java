@@ -91,10 +91,11 @@ public class AbilityList {
         }
     }
 
-    public void testAbilityList() {
+    public void showAbilityList() {
         Scanner in = new Scanner(System.in);
 //        sectionIterator = abilitySections.iterator();
         String menuItem = "";
+        showNextSection();
 
         while (!menuItem.toLowerCase().equals("r")) {
             System.out.println("Next Page <n>, Previous Page <p>, All Pages <a>, Page by Index <i>, Return <r>: ");
@@ -125,6 +126,6 @@ public class AbilityList {
         chList.addCharacters();
         Character first = chList.getCharacterList().get(0);
         AbilityList abilityList = new AbilityList(first);
-        abilityList.testAbilityList();
+        abilityList.showAbilityList();
     }
 }

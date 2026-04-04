@@ -271,13 +271,13 @@ public class CharacterList {
                     c = showNextChar();
                     System.out.println(c.getInfo());
                     abList = new AbilityList(c);
-                    abList.testAbilityList();
+                    abList.showAbilityList();
                     break;
                 case "p":
                     c = showPreviousChar();
                     System.out.println(c.getInfo());
                     abList = new AbilityList(c);
-                    abList.testAbilityList();
+                    abList.showAbilityList();
                     break;
                 case "a":
                     showAllCharacters();
@@ -286,7 +286,7 @@ public class CharacterList {
                     c = showSingleCharacter(in);
                     System.out.println(c.getInfo());
                     abList = new AbilityList(c);
-                    abList.testAbilityList();
+                    abList.showAbilityList();
                     break;
             }
         }
