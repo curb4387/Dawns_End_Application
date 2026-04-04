@@ -16,7 +16,7 @@ public class Character {
         this.actions = actions;
     }
 
-    private String formatActions() {
+    public String formatActions() {
         String actionsString = "";
         for (Actions action : actions) {
             actionsString += action.toString();
@@ -30,5 +30,21 @@ public class Character {
                 stats.toString() + "\n" +
                 skills.toString() + "\n" +
                 "Actions\n" + formatActions();
+    }
+
+    public CharacterInfo getInfo() {
+        return info;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public Set<Actions> getActions() {
+        return actions;
     }
 }

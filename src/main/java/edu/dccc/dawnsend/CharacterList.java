@@ -254,8 +254,9 @@ public class CharacterList {
 
     public void testCharacterList() {
         Scanner in = new Scanner(System.in);
-        iterator = characterList.iterator();
+//        iterator = characterList.iterator();
         String menuItem = "";
+
 
         while (!menuItem.toLowerCase().equals("q")) {
             System.out.println("Next Character <n>, Previous Character <p>, All Characters <a>, Character by Index <i>, Quit <q>: ");
@@ -264,6 +265,7 @@ public class CharacterList {
             switch (menuItem.toLowerCase()) {
                 case "n":
                     Character nCh = showNextChar();
+
                     System.out.println(nCh);
                     break;
                 case "p":
