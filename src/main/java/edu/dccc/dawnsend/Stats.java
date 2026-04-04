@@ -13,7 +13,7 @@ public class Stats {
 
     @Override
     public String toString() {
-        return "All Stats\n" +
+        return "ALL STATS\n----------\n" +
                 "Main Stats:\n" + mainStats + "\n" +
                 "\nOther Stats:\n" + otherStats + "\n";
     }

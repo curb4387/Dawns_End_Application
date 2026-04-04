@@ -17,7 +17,7 @@ public class CharacterInfo {
 
     @Override
     public String toString() {
-        return "Character\n" +
+        return "CHARACTER\n----------\n" +
                 "Name: " + name + "\n" +
                 "Race: " + race + "\n" +
                 "Class: " + charClass + "\n" +

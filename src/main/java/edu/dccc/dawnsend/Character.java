@@ -17,7 +17,7 @@ public class Character {
     }
 
     public String formatActions() {
-        String actionsString = "";
+        String actionsString = "ACTIONS\n----------\n";
         for (Actions action : actions) {
             actionsString += action.toString();
         }

@@ -13,7 +13,7 @@ public class Skills {
 
     @Override
     public String toString() {
-        return "All Skills\n" +
+        return "ALL SKILLS\n----------\n" +
                 "Main Skills:\n" + mainSkills + "\n" +
                 "Senses:\n" + senses + "\n";
     }
