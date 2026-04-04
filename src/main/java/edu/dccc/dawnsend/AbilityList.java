@@ -100,7 +100,7 @@ public class AbilityList {
         while (!menuItem.toLowerCase().equals("r")) {
             System.out.println("Next Page <n>, Previous Page <p>, All Pages <a>, Page by Index <i>, Return <r>: ");
             menuItem = in.nextLine();
-            AbilitySection section;
+            AbilitySection section; // need to include or else INFO will show twice
 
             switch (menuItem.toLowerCase()) {
                 case "n":
