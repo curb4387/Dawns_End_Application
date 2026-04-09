@@ -20,6 +20,7 @@ public class CharacterList {
 
     private Character createBarbonk() {
         // build character info
+        // change image url to "main/resources/images/..." if it doesn't work, then refactor images folder back to "/edu/dccc/dawnsend/images/..."
         CharacterInfo info = new CharacterInfo("The Dred Pirate Barbonk", "Goliath", "Barbarian", 5, "/edu/dccc/dawnsend/images/barbonk.png");
 
         // build stats
@@ -54,7 +55,7 @@ public class CharacterList {
 
     private Character createEB3() {
         // build character info
-        CharacterInfo info = new CharacterInfo("Edmund Boxley the Third (among other aliases)", "Changeling", "Bard", 5, "/edu/dccc/dawnsend/images/eb3.png");
+        CharacterInfo info = new CharacterInfo("Edmund Boxley the Third(?)", "Changeling", "Bard", 5, "/edu/dccc/dawnsend/images/eb3.jpeg");
 
         // build stats
         Stats stats = new Stats(
@@ -94,7 +95,7 @@ public class CharacterList {
 
     private Character createGirr() {
         // build character info
-        CharacterInfo info = new CharacterInfo("Girr Bunnykix", "Harengon", "Druid", 5, "/edu/dccc/dawnsend/images/girr.png");
+        CharacterInfo info = new CharacterInfo("Girr Bunnykix", "Harengon", "Druid", 5, "/edu/dccc/dawnsend/images/girr.jpeg");
 
         // build stats
         Stats stats = new Stats(
@@ -129,7 +130,7 @@ public class CharacterList {
 
     private Character createShadark() {
         // build character info
-        CharacterInfo info = new CharacterInfo("Shadark Ember", "Wood Elf", "Ranger", 5, "/edu/dccc/dawnsend/images/shad.png");
+        CharacterInfo info = new CharacterInfo("Shadark Ember", "Wood Elf", "Ranger", 5, "/edu/dccc/dawnsend/images/shad.jpeg");
 
         // build stats
         Stats stats = new Stats(
@@ -163,7 +164,7 @@ public class CharacterList {
 
     private Character createSoop() {
         // build character info
-        CharacterInfo info = new CharacterInfo("Soop the Slinky", "Bugbear", "Rogue", 5, "/edu/dccc/dawnsend/images/soop.png");
+        CharacterInfo info = new CharacterInfo("Soop the Slinky", "Bugbear", "Rogue", 5, "/edu/dccc/dawnsend/images/soop.jpeg");
 
         // build stats
         Stats stats = new Stats(
@@ -222,7 +223,7 @@ public class CharacterList {
             iterator.previous();
         }
         moveForward = false;
-        return iterator.next();
+        return iterator.previous();
     }
 
     // include index of character so finding via index works
