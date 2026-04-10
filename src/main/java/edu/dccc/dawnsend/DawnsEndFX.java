@@ -83,7 +83,21 @@ public class DawnsEndFX extends Application {
         Button nextButton = new Button("Next");
         prevButton.setPrefWidth(100);
         nextButton.setPrefWidth(100);
-        HBox buttonBar = new HBox(20, prevButton, nextButton);
+
+        // logo between buttons
+        ImageView logoImage = new ImageView();
+
+        try {
+            Image logo = new Image("/edu/dccc/dawnsend/images/logo.png");
+            logoImage.setImage(logo);
+        } catch (Exception e) {
+            System.out.println("Error loading image");
+        }
+
+        logoImage.setPreserveRatio(true);
+        logoImage.setFitWidth(60);
+
+        HBox buttonBar = new HBox(10, prevButton, logoImage, nextButton);
         buttonBar.setAlignment(Pos.CENTER);
         buttonBar.setPadding(new Insets(15));
 
@@ -140,6 +154,19 @@ public class DawnsEndFX extends Application {
 
         /** Scene and Stage */
         Scene scene = new Scene(root, 800, 520);
+
+        // icon for app
+        try {
+            Image appImg = new Image("/edu/dccc/dawnsend/images/appimg.png");
+            ImageView appLogo = new ImageView(appImg);
+            appLogo.setPreserveRatio(true);
+            appLogo.setFitWidth(5);
+            appImg = appLogo.getImage();
+            stage.getIcons().add(appImg);
+        } catch (Exception e) {
+            System.out.println("Error loading image");
+        }
+
         stage.setTitle("Dawn's End - Dungeons & Dragons Campaign");
         stage.setScene(scene);
         stage.show();
@@ -229,13 +256,7 @@ public class DawnsEndFX extends Application {
                 break;
 
             case SKILLS:
-//                data.add(new String[]{"SKILLS"});
-//                data.add(new String[]{character.getSkills().getMainSkills().toString(), ""});
-//
-//                data.add(new String[]{"----------"});
-//
-//                data.add(new String[]{"SENSES"});
-//                data.add(new String[]{character.getSkills().getSenses().toString(), ""});
+                // format included in populateSkillsGrid() and updated in updateSectionDisplay()
                 break;
 
             case ACTIONS:
