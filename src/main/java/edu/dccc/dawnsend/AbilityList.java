@@ -39,7 +39,7 @@ public class AbilityList {
                 System.out.println(character.getSkills());
                 break;
             case ACTIONS:
-                System.out.println(character.formatActions());
+                System.out.println("ACTIONS\n----------\n" + character.formatActions());
                 break;
         }
     }
@@ -67,8 +67,8 @@ public class AbilityList {
     // include index of character so finding via index works
     public void showAllSections() {
         for (int i = 0; i < abilitySections.size(); i++) {
-            System.out.println("Section Index: " + i + "\n" + abilitySections.get(i));
-            System.out.println(character);
+            System.out.println("Section Index: " + i);
+            showPage(abilitySections.get(i));
         }
     }
 
@@ -76,7 +76,7 @@ public class AbilityList {
     public void showSingleSection(Scanner in) {
         System.out.println("Enter index: ");
         int index = Integer.parseInt(in.nextLine());
-        System.out.println("Section at index: " + index + "\n");
+        System.out.println("Section at index: " + index);
         showPage(abilitySections.get(index));
         resetIteratorToIndex(index + 1);
     }
