@@ -10,9 +10,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -20,6 +23,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Stack;
 
 public class DawnsEndFX extends Application {
     private final CharacterList characters = new CharacterList();
@@ -34,7 +38,9 @@ public class DawnsEndFX extends Application {
     GridPane details = new GridPane();
     private final Label nameLabel = new Label();
     private final ImageView characterImage = new ImageView();
+    private final ImageView borderImage = new ImageView();
     private final Label sectionLabel = new Label();
+    private final Label bioLabel = new Label();
 
     @Override
     public void start(Stage stage) {
@@ -44,7 +50,13 @@ public class DawnsEndFX extends Application {
 
         /** set up view */
         // Top: header
+        // nameLabel styles
         nameLabel.setFont(Font.font("Serif", FontWeight.BOLD, 22));
+        nameLabel.setTextFill(Color.WHITE);
+        DropShadow ds = new DropShadow();
+        ds.setColor(Color.BLACK);
+        nameLabel.setEffect(ds);
+
         HBox topBar = new HBox(nameLabel);
         topBar.setAlignment(Pos.CENTER);
         topBar.setPadding(new Insets(15));
@@ -69,14 +81,30 @@ public class DawnsEndFX extends Application {
         // align section buttons in center
         detailsWrapper.setAlignment(Pos.CENTER);
         detailsWrapper.setPadding(new Insets(5));
+        detailsWrapper.setStyle(
+                "-fx-background-color: rgba(255, 255, 255, 0.8);"
+        );
 
-        // Left: image
+        // Left: character image and border on top of image
         characterImage.setFitWidth(200);
-        characterImage.setPreserveRatio(true);
+        characterImage.setFitHeight(220);
+//        characterImage.setPreserveRatio(true);
         characterImage.setSmooth(true);
-        VBox imageBox = new VBox(characterImage);
-        imageBox.setPadding(new Insets(10));
-        imageBox.setAlignment(Pos.TOP_CENTER);
+        borderImage.setFitWidth(250);
+        borderImage.setFitHeight(300);
+        borderImage.setSmooth(true);
+
+        // clip for characterImage to round out corners
+        Rectangle clip = new Rectangle(characterImage.getFitWidth(), characterImage.getFitHeight());
+        clip.setArcWidth(70);
+        clip.setArcHeight(70);
+        characterImage.setClip(clip);
+
+        StackPane imageBox = new StackPane(characterImage, borderImage);
+
+        VBox imageBioBox = new VBox(imageBox, );
+        imageBioBox.setPadding(new Insets(10));
+        imageBioBox.setAlignment(Pos.CENTER);
 
         // Bottom: buttons
         Button prevButton = new Button("Previous");
@@ -112,8 +140,8 @@ public class DawnsEndFX extends Application {
         // add background image
         try {
             Image background = new Image("/edu/dccc/dawnsend/images/background.jpg");
-            BackgroundImage backgroundImg = new BackgroundImage(background, null, null, BackgroundPosition.CENTER,
-                    new BackgroundSize(100, 100, true, true, true, true));
+            BackgroundSize bgSize = new BackgroundSize(1.0, 1.0, true, true, false, false);
+            BackgroundImage backgroundImg = new BackgroundImage(background, null, null, BackgroundPosition.CENTER, bgSize);
             root.setBackground(new Background(backgroundImg));
         } catch (Exception e) {
             System.out.println("Error loading image");
@@ -163,7 +191,7 @@ public class DawnsEndFX extends Application {
         });
 
         /** Scene and Stage */
-        Scene scene = new Scene(root, 800, 520);
+        Scene scene = new Scene(root, 850, 520);
 
         // icon for app
         try {
@@ -301,6 +329,8 @@ public class DawnsEndFX extends Application {
         try {
             Image img = new Image(getClass().getResourceAsStream(character.getInfo().getImgSrc()));
             characterImage.setImage(img);
+            Image borderImg = new Image("/edu/dccc/dawnsend/images/imageborder.png");
+            borderImage.setImage(borderImg);
         } catch (Exception e) {
             System.err.println("Error loading image: " + character.getInfo().getImgSrc());
         }
