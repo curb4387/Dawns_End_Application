@@ -50,7 +50,7 @@ public class DawnsEndFX extends Application {
         /** set up view */
         // Top: header
         // nameLabel styles
-        nameLabel.setFont(Font.font("Serif", FontWeight.BOLD, 22));
+        nameLabel.setFont(Font.font("Serif", FontWeight.BOLD, 25));
         nameLabel.setTextFill(Color.WHITE);
         DropShadow ds = new DropShadow();
         ds.setColor(Color.BLACK);
@@ -187,7 +187,7 @@ public class DawnsEndFX extends Application {
         });
 
         /** Scene and Stage */
-        Scene scene = new Scene(root, 850, 520);
+        Scene scene = new Scene(root, 850, 550);
 
         // icon for app
         try {
@@ -224,6 +224,8 @@ public class DawnsEndFX extends Application {
             } else {
                 Label key = new Label(pair[0] + " ");
                 Label value = new Label(pair[1]);
+                key.setFont(Font.font(14));
+                value.setFont(Font.font(14));
 
                 grid.add(key, 1, row);
                 grid.add(value, 2, row);
@@ -248,14 +250,24 @@ public class DawnsEndFX extends Application {
         // left column - Skills
         int rowSkills = 1;
         for (String skill : character.getSkills().getMainSkills().getMainSkills()) {
-            details.add(new Label(skill), 1, rowSkills++);
+            Label s = new Label(skill);
+            s.setFont(Font.font(14));
+            details.add(s, 1, rowSkills++);
         }
 
         // right column - Senses
         int rowSenses = 1;
-        details.add(new Label("Passive Perception:     " + character.getSkills().getSenses().getPassPercept()), 2, rowSenses++);
-        details.add(new Label("Passive Investigation:  " + character.getSkills().getSenses().getPassInvest()), 2, rowSenses++);
-        details.add(new Label("Passive Insight:            " + character.getSkills().getSenses().getPassInsight()), 2, rowSenses++);
+        Label percep = new Label("Passive Perception:     " + String.valueOf(character.getSkills().getSenses().getPassPercept()));
+        Label invest = new Label("Passive Investigation:  " + String.valueOf(character.getSkills().getSenses().getPassInvest()));
+        Label insight = new Label("Passive Insight:            " + String.valueOf(character.getSkills().getSenses().getPassInsight()));
+
+        percep.setFont(Font.font(14));
+        invest.setFont(Font.font(14));
+        insight.setFont(Font.font(14));
+
+        details.add(percep, 2, rowSenses++);
+        details.add(invest, 2, rowSenses++);
+        details.add(insight, 2, rowSenses++);
     }
 
 
