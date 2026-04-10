@@ -32,8 +32,6 @@ public class DawnsEndFX extends Application {
     // UI components
     GridPane details = new GridPane();
     private final Label nameLabel = new Label();
-    private final TextArea leftDetailsArea = new TextArea();
-    private final TextArea rightDetailsArea = new TextArea();
     private final ImageView characterImage = new ImageView();
     private final Label sectionLabel = new Label();
 
@@ -57,13 +55,11 @@ public class DawnsEndFX extends Application {
         VBox centerBox = new VBox(10, sectionLabel, details);
         centerBox.setPadding(new Insets(10));
 
-        leftDetailsArea.setEditable(false);
-        leftDetailsArea.setWrapText(true);
-        leftDetailsArea.setStyle("-fx-font-family: 'Monospaced'; -fx-font-size: 14;");
-
-        rightDetailsArea.setEditable(false);
-        rightDetailsArea.setWrapText(true);
-        rightDetailsArea.setStyle("-fx-font-family: 'Monospaced'; -fx-font-size: 14;");
+        // Left/Right: left and right section buttons
+        Button prevSectionBtn = new Button("⮜"); // unicode: U+2B9C
+        Button nextSectionBtn = new Button("⮞"); // unicode: U+2B9E
+        prevSectionBtn.setPrefWidth(50);
+        nextSectionBtn.setPrefWidth(50);
 
         // Left: image
         characterImage.setFitWidth(200);
@@ -72,12 +68,6 @@ public class DawnsEndFX extends Application {
         VBox imageBox = new VBox(characterImage);
         imageBox.setPadding(new Insets(10));
         imageBox.setAlignment(Pos.TOP_CENTER);
-
-        // Left/Right: left and right section buttons
-        Button prevSectionBtn = new Button("⮜"); // unicode: U+2B9C
-        Button nextSectionBtn = new Button("⮞"); // unicode: U+2B9E
-        prevSectionBtn.setPrefWidth(50);
-        nextSectionBtn.setPrefWidth(50);
 
         // Bottom: buttons
         Button prevButton = new Button("Previous");
@@ -159,13 +149,13 @@ public class DawnsEndFX extends Application {
         for (String[] pair : data) {
             if (pair.length == 1) {
                 Label value = new Label(pair[0]);
-                grid.add(value, 0, row, 2, 1); // 2, 1 makes it span 2 columns
+                grid.add(value, 1, row, 2, 1); // 2, 1 makes it span 2 columns
             } else {
                 Label key = new Label(pair[0] + ":");
                 Label value = new Label(pair[1]);
 
-                grid.add(key, 0, row);
-                grid.add(value, 1, row);
+                grid.add(key, 1, row);
+                grid.add(value, 2, row);
             }
             row++;
         }
