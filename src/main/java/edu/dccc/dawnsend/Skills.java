@@ -18,6 +18,14 @@ public class Skills {
                 "Senses:\n" + senses + "\n";
     }
 
+    public MainSkills getMainSkills() {
+        return mainSkills;
+    }
+
+    public Senses getSenses() {
+        return senses;
+    }
+
     // inner class to get Skills
     public static class MainSkills {
         Set<String> mainSkills;
