@@ -109,6 +109,16 @@ public class DawnsEndFX extends Application {
         root.setBottom(buttonBar);
         root.setPadding(new Insets(10));
 
+        // add background image
+        try {
+            Image background = new Image("/edu/dccc/dawnsend/images/background.jpg");
+            BackgroundImage backgroundImg = new BackgroundImage(background, null, null, BackgroundPosition.CENTER,
+                    new BackgroundSize(100, 100, true, true, true, true));
+            root.setBackground(new Background(backgroundImg));
+        } catch (Exception e) {
+            System.out.println("Error loading image");
+        }
+
         /** Controller logic */
         prevButton.setOnAction(e -> {
             if (moveForward) {
