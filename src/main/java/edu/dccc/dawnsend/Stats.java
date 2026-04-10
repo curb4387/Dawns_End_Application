@@ -18,6 +18,14 @@ public class Stats {
                 "\nOther Stats:\n" + otherStats + "\n";
     }
 
+    public MainStats getMainStats() {
+        return mainStats;
+    }
+
+    public OtherStats getOtherStats() {
+        return otherStats;
+    }
+
     // inner class to get MainStats
     public static class MainStats {
         int str;
