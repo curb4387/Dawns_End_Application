@@ -4,6 +4,7 @@ import edu.dccc.store.CircularLinkedList;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -170,6 +171,33 @@ public class DawnsEndFX extends Application {
         }
     }
 
+    // method to populate grid for Skills section
+    private void populateSkillsGrid(Character character) {
+        details.getChildren().clear();
+
+        // 2 headers
+        Label skillsHeader = new Label("SKILLS");
+        Label sensesHeader = new Label("SENSES");
+        skillsHeader.setFont(Font.font("Serif", FontWeight.BOLD, 18));
+        sensesHeader.setFont(Font.font("Serif", FontWeight.BOLD, 18));
+        // add headers
+        details.add(skillsHeader, 1, 0);
+        details.add(sensesHeader, 2, 0);
+
+        // left column - Skills
+        int rowSkills = 1;
+        for (String skill : character.getSkills().getMainSkills().getMainSkills()) {
+            details.add(new Label(skill), 1, rowSkills++);
+        }
+
+        // right column - Senses
+        int rowSenses = 1;
+        details.add(new Label("Passive Perception:     " + character.getSkills().getSenses().getPassPercept()), 2, rowSenses++);
+        details.add(new Label("Passive Investigation:  " + character.getSkills().getSenses().getPassInvest()), 2, rowSenses++);
+        details.add(new Label("Passive Insight:            " + character.getSkills().getSenses().getPassInsight()), 2, rowSenses++);
+    }
+
+
     // add data to grid
     private List<String[]> buildSection(Character character, AbilityList.AbilitySection section) {
         List<String[]> data = new ArrayList<>();
@@ -201,13 +229,13 @@ public class DawnsEndFX extends Application {
                 break;
 
             case SKILLS:
-                data.add(new String[]{"SKILLS"});
-                data.add(new String[]{character.getSkills().getMainSkills().toString(), ""});
-
-                data.add(new String[]{"----------"});
-
-                data.add(new String[]{"SENSES"});
-                data.add(new String[]{character.getSkills().getSenses().toString(), ""});
+//                data.add(new String[]{"SKILLS"});
+//                data.add(new String[]{character.getSkills().getMainSkills().toString(), ""});
+//
+//                data.add(new String[]{"----------"});
+//
+//                data.add(new String[]{"SENSES"});
+//                data.add(new String[]{character.getSkills().getSenses().toString(), ""});
                 break;
 
             case ACTIONS:
@@ -248,10 +276,25 @@ public class DawnsEndFX extends Application {
     }
 
     private void updateSectionDisplay(Character character, AbilityList.AbilitySection section) {
-//        sectionLabel.setText(section.toString());
-
-        List<String[]> data = buildSection(character, section);
-        populateGrid(details, data);
+        // set column widths according to section
+        ColumnConstraints col1 = new ColumnConstraints();
+        ColumnConstraints col2 = new ColumnConstraints();
+        ColumnConstraints col3 = new ColumnConstraints();
+        if (section == AbilityList.AbilitySection.SKILLS) {
+            col1.setPercentWidth(0);
+            col2.setPercentWidth(40);
+            col3.setPercentWidth(40);
+            details.getColumnConstraints().setAll(col1, col2, col3);
+            populateSkillsGrid(character);
+        } else {
+            // reset column constraints so other section content don't move
+            col1.setPercentWidth(-1);
+            col2.setPercentWidth(-1);
+            col3.setPercentWidth(-1);
+            details.getColumnConstraints().setAll(col1, col2, col3);
+            List<String[]> data = buildSection(character, section);
+            populateGrid(details, data);
+        }
     }
 
     public static void main(String[] args) {
