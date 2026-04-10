@@ -40,7 +40,6 @@ public class DawnsEndFX extends Application {
     private final ImageView characterImage = new ImageView();
     private final ImageView borderImage = new ImageView();
     private final Label sectionLabel = new Label();
-    private final Label bioLabel = new Label();
 
     @Override
     public void start(Stage stage) {
@@ -91,7 +90,7 @@ public class DawnsEndFX extends Application {
 //        characterImage.setPreserveRatio(true);
         characterImage.setSmooth(true);
         borderImage.setFitWidth(250);
-        borderImage.setFitHeight(300);
+        borderImage.setFitHeight(270);
         borderImage.setSmooth(true);
 
         // clip for characterImage to round out corners
@@ -101,10 +100,7 @@ public class DawnsEndFX extends Application {
         characterImage.setClip(clip);
 
         StackPane imageBox = new StackPane(characterImage, borderImage);
-
-        VBox imageBioBox = new VBox(imageBox, );
-        imageBioBox.setPadding(new Insets(10));
-        imageBioBox.setAlignment(Pos.CENTER);
+        imageBox.setAlignment(Pos.CENTER);
 
         // Bottom: buttons
         Button prevButton = new Button("Previous");
