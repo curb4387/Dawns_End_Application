@@ -55,7 +55,7 @@ public class CharacterList {
 
     private Character createEB3() {
         // build character info
-        CharacterInfo info = new CharacterInfo("Edmund Boxley the Third(?)", "Changeling", "Bard", 5, "/edu/dccc/dawnsend/images/eb3.jpeg");
+        CharacterInfo info = new CharacterInfo("Edmund Boxley the Third (?)", "Changeling", "Bard", 5, "/edu/dccc/dawnsend/images/eb3.jpeg");
 
         // build stats
         Stats stats = new Stats(
