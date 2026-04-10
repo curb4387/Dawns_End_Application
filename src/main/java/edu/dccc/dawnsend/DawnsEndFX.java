@@ -65,7 +65,6 @@ public class DawnsEndFX extends Application {
         HBox detailsWrapper = new HBox(10, prevSectionBtn, centerBox, nextSectionBtn);
         HBox.setHgrow(centerBox, Priority.ALWAYS); // grow horizontally so buttons stay in place
         centerBox.setMaxWidth(Double.MAX_VALUE);
-//        VBox.setVgrow(centerBox, Priority.ALWAYS);
         // align section buttons in center
         detailsWrapper.setAlignment(Pos.CENTER);
         detailsWrapper.setPadding(new Insets(5));
@@ -139,7 +138,7 @@ public class DawnsEndFX extends Application {
         });
 
         /** Scene and Stage */
-        Scene scene = new Scene(root, 800, 480);
+        Scene scene = new Scene(root, 800, 520);
         stage.setTitle("Dawn's End - Dungeons & Dragons Campaign");
         stage.setScene(scene);
         stage.show();
@@ -159,8 +158,9 @@ public class DawnsEndFX extends Application {
             if (pair.length == 1) {
                 Label value = new Label(pair[0]);
                 grid.add(value, 1, row, 2, 1); // 2, 1 makes it span 2 columns
+                value.setFont(Font.font("Serif", FontWeight.BOLD, 18));
             } else {
-                Label key = new Label(pair[0] + ":");
+                Label key = new Label(pair[0] + " ");
                 Label value = new Label(pair[1]);
 
                 grid.add(key, 1, row);
@@ -177,42 +177,53 @@ public class DawnsEndFX extends Application {
         switch (section) {
             case INFO:
                 data.add(new String[]{"CHARACTER INFO"});
-                data.add(new String[]{"Name", character.getInfo().getName()});
-                data.add(new String[]{"Race", character.getInfo().getRace()});
-                data.add(new String[]{"Class", character.getInfo().getCharClass()});
-                data.add(new String[]{"Level", String.valueOf(character.getInfo().getLevel())});
+                data.add(new String[]{"Name:", character.getInfo().getName()});
+                data.add(new String[]{"Race:", character.getInfo().getRace()});
+                data.add(new String[]{"Class:", character.getInfo().getCharClass()});
+                data.add(new String[]{"Level:", String.valueOf(character.getInfo().getLevel())});
                 break;
 
             case STATS:
                 data.add(new String[]{"STATS"});
-                data.add(new String[]{"Strength", String.valueOf(character.getStats().getMainStats().getStr())});
-                data.add(new String[]{"Dexterity", String.valueOf(character.getStats().getMainStats().getDex())});
-                data.add(new String[]{"Constitution", String.valueOf(character.getStats().getMainStats().getCon())});
-                data.add(new String[]{"Intelligence", String.valueOf(character.getStats().getMainStats().getIntel())});
-                data.add(new String[]{"Wisdom", String.valueOf(character.getStats().getMainStats().getWis())});
-                data.add(new String[]{"Charisma", String.valueOf(character.getStats().getMainStats().getCha())});
+                data.add(new String[]{"Strength:", String.valueOf(character.getStats().getMainStats().getStr())});
+                data.add(new String[]{"Dexterity:", String.valueOf(character.getStats().getMainStats().getDex())});
+                data.add(new String[]{"Constitution:", String.valueOf(character.getStats().getMainStats().getCon())});
+                data.add(new String[]{"Intelligence:", String.valueOf(character.getStats().getMainStats().getIntel())});
+                data.add(new String[]{"Wisdom:", String.valueOf(character.getStats().getMainStats().getWis())});
+                data.add(new String[]{"Charisma:", String.valueOf(character.getStats().getMainStats().getCha())});
 
                 data.add(new String[]{"----------"});
 
-                data.add(new String[]{"Proficiency Bonus", "+" + String.valueOf(character.getStats().getOtherStats().getProficiency())});
-                data.add(new String[]{"Walking Speed", String.valueOf(character.getStats().getOtherStats().getWalking()) + " ft."});
-                data.add(new String[]{"Initiative", "+" + String.valueOf(character.getStats().getOtherStats().getInitiative())});
-                data.add(new String[]{"Armor Class", String.valueOf(character.getStats().getOtherStats().getArmorClass())});
+                data.add(new String[]{"Proficiency Bonus:", "+" + String.valueOf(character.getStats().getOtherStats().getProficiency())});
+                data.add(new String[]{"Walking Speed:", String.valueOf(character.getStats().getOtherStats().getWalking()) + " ft."});
+                data.add(new String[]{"Initiative:", "+" + String.valueOf(character.getStats().getOtherStats().getInitiative())});
+                data.add(new String[]{"Armor Class:", String.valueOf(character.getStats().getOtherStats().getArmorClass())});
                 break;
 
             case SKILLS:
                 data.add(new String[]{"SKILLS"});
-                data.add(new String[]{character.getSkills().getMainSkills().toString()});
+                data.add(new String[]{character.getSkills().getMainSkills().toString(), ""});
 
                 data.add(new String[]{"----------"});
 
                 data.add(new String[]{"SENSES"});
-                data.add(new String[]{character.getSkills().getSenses().toString()});
+                data.add(new String[]{character.getSkills().getSenses().toString(), ""});
                 break;
 
             case ACTIONS:
                 data.add(new String[]{"ACTIONS"});
-                data.add(new String[]{character.formatActions()});
+                data.add(new String[]{"Attack", "Damage"});
+
+                for (Actions action : character.getActions()) {
+                    String attack = action.getAttack();
+                    String dmg = "";
+                    if (action.getMinDamage() == action.getMaxDamage()) {
+                        dmg = String.valueOf(action.getMaxDamage());
+                    } else {
+                        dmg = String.valueOf(action.getMinDamage()) + " - " + String.valueOf(action.getMaxDamage());
+                    }
+                    data.add(new String[]{attack, dmg});
+                }
                 break;
         }
 
