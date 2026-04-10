@@ -61,6 +61,15 @@ public class DawnsEndFX extends Application {
         prevSectionBtn.setPrefWidth(50);
         nextSectionBtn.setPrefWidth(50);
 
+        // add wrapper box around details content to include section buttons
+        HBox detailsWrapper = new HBox(10, prevSectionBtn, centerBox, nextSectionBtn);
+        HBox.setHgrow(centerBox, Priority.ALWAYS); // grow horizontally so buttons stay in place
+        centerBox.setMaxWidth(Double.MAX_VALUE);
+//        VBox.setVgrow(centerBox, Priority.ALWAYS);
+        // align section buttons in center
+        detailsWrapper.setAlignment(Pos.CENTER);
+        detailsWrapper.setPadding(new Insets(5));
+
         // Left: image
         characterImage.setFitWidth(200);
         characterImage.setPreserveRatio(true);
@@ -82,7 +91,7 @@ public class DawnsEndFX extends Application {
         BorderPane root = new BorderPane();
         root.setTop(topBar);
         root.setLeft(imageBox);
-        root.setCenter(centerBox);
+        root.setCenter(detailsWrapper);
         root.setBottom(buttonBar);
         root.setPadding(new Insets(10));
 
@@ -228,7 +237,7 @@ public class DawnsEndFX extends Application {
     }
 
     private void updateSectionDisplay(Character character, AbilityList.AbilitySection section) {
-        sectionLabel.setText(section.toString());
+//        sectionLabel.setText(section.toString());
 
         List<String[]> data = buildSection(character, section);
         populateGrid(details, data);
