@@ -97,9 +97,7 @@ public class DawnsEndFX extends Application {
         // align section buttons in center
         detailsWrapper.setAlignment(Pos.CENTER);
         detailsWrapper.setPadding(new Insets(5));
-        detailsWrapper.setStyle(
-                "-fx-background-color: rgba(255, 255, 255, 0.8);"
-        );
+        detailsWrapper.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
 
         // Left: character image and border on top of image
         characterImage.setFitWidth(200);
@@ -124,8 +122,8 @@ public class DawnsEndFX extends Application {
         Button nextButton = new Button("Next");
         prevButton.setPrefWidth(100);
         nextButton.setPrefWidth(100);
-        prevButton.setFont(new Font(14));
-        nextButton.setFont(new Font(14));
+        prevButton.setFont(Font.font("Serif", 15));
+        nextButton.setFont(Font.font("Serif", 15));
 
         // logo between buttons
         ImageView logoImage = new ImageView();
