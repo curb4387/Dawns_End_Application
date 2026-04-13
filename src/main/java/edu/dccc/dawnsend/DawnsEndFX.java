@@ -73,8 +73,22 @@ public class DawnsEndFX extends Application {
         prevSectionBtn.setPrefWidth(50);
         nextSectionBtn.setPrefWidth(50);
 
+        // add checkbox for moving to next page with timer
+        CheckBox autoBox = new CheckBox("Auto");
+        // use to align button and checkbox
+        Region emptyBox1 = new Region();
+        Region emptyBox2 = new Region();
+        VBox buttonsWrapper = new VBox(emptyBox1, nextSectionBtn, emptyBox2, autoBox);
+
+        // align nextSectionBtn in center vertically and align horizontally with prevSectionBtn
+        buttonsWrapper.setAlignment(Pos.CENTER);
+        VBox.setVgrow(emptyBox1, Priority.ALWAYS);
+        VBox.setVgrow(emptyBox2, Priority.ALWAYS);
+        VBox.setMargin(nextSectionBtn, new Insets(18, 0, 0, 0));
+
+
         // add wrapper box around details content to include section buttons
-        HBox detailsWrapper = new HBox(10, prevSectionBtn, centerBox, nextSectionBtn);
+        HBox detailsWrapper = new HBox(10, prevSectionBtn, centerBox, buttonsWrapper);
         HBox.setHgrow(centerBox, Priority.ALWAYS); // grow horizontally so buttons stay in place
         centerBox.setMaxWidth(Double.MAX_VALUE);
         // align section buttons in center
@@ -107,6 +121,8 @@ public class DawnsEndFX extends Application {
         Button nextButton = new Button("Next");
         prevButton.setPrefWidth(100);
         nextButton.setPrefWidth(100);
+        prevButton.setFont(new Font(14));
+        nextButton.setFont(new Font(14));
 
         // logo between buttons
         ImageView logoImage = new ImageView();
