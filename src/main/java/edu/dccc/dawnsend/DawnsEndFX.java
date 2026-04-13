@@ -1,6 +1,8 @@
 package edu.dccc.dawnsend;
 
 import edu.dccc.store.CircularLinkedList;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class DawnsEndFX extends Application {
     private CircularLinkedList<Character> characterList;
     private ListIterator<Character> iterator;
     private boolean moveForward = true;
+    private boolean nextCharacter = false;
     private AbilityList abilityList;
     private AbilityList.AbilitySection currentSection;
     private Character currentCharacter;
@@ -74,18 +78,17 @@ public class DawnsEndFX extends Application {
         nextSectionBtn.setPrefWidth(50);
 
         // add checkbox for moving to next page with timer
-        CheckBox autoBox = new CheckBox("Auto");
+        CheckBox autoBtn = new CheckBox("Auto");
         // use to align button and checkbox
         Region emptyBox1 = new Region();
         Region emptyBox2 = new Region();
-        VBox buttonsWrapper = new VBox(emptyBox1, nextSectionBtn, emptyBox2, autoBox);
+        VBox buttonsWrapper = new VBox(emptyBox1, nextSectionBtn, emptyBox2, autoBtn);
 
         // align nextSectionBtn in center vertically and align horizontally with prevSectionBtn
         buttonsWrapper.setAlignment(Pos.CENTER);
         VBox.setVgrow(emptyBox1, Priority.ALWAYS);
         VBox.setVgrow(emptyBox2, Priority.ALWAYS);
         VBox.setMargin(nextSectionBtn, new Insets(18, 0, 0, 0));
-
 
         // add wrapper box around details content to include section buttons
         HBox detailsWrapper = new HBox(10, prevSectionBtn, centerBox, buttonsWrapper);
@@ -199,6 +202,36 @@ public class DawnsEndFX extends Application {
             if (abilityList != null) {
                 currentSection = abilityList.showNextSection();
                 updateSectionDisplay(getCurrentCharacter(), currentSection);
+            }
+        });
+
+        // auto checkbox
+        Timeline autoIterate;
+        autoIterate = new Timeline(
+                new KeyFrame(Duration.seconds(5), e -> {
+                    if (abilityList != null) {
+                        if (nextCharacter) {
+                            if (iterator.hasNext()) {
+                                updateDisplay(iterator.next());
+                            }
+                            nextCharacter = false;
+                            return;
+                        }
+                        currentSection = abilityList.showNextSection();
+                        updateSectionDisplay(getCurrentCharacter(), currentSection);
+                        if (currentSection == AbilityList.AbilitySection.ACTIONS) {
+                            nextCharacter = true;
+                        }
+                    }
+                })
+        );
+        autoIterate.setCycleCount(Timeline.INDEFINITE); // auto iterate as long as box is checked
+
+        autoBtn.setOnAction(e -> {
+            if (autoBtn.isSelected()) {
+                autoIterate.play();
+            } else {
+                autoIterate.stop();
             }
         });
 
